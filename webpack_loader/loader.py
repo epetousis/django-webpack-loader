@@ -49,8 +49,6 @@ class WebpackLoader(object):
 
     def get_chunk_url(self, chunk):
         public_path = chunk.get('publicPath')
-        # get_chunk_url assumes you don't prepend a URL
-        # to the start of publicPaths in your webpack config.
         # TODO: Add a WEBPACK_LOADER flag to revert to old
         # functionality
         if public_path:
