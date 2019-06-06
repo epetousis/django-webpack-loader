@@ -52,12 +52,11 @@ class WebpackLoader(object):
         # to the start of publicPaths in your webpack config.
         # TODO: Add a WEBPACK_LOADER flag to revert to old
         # functionality
-        relpath_dir_prefix = self.config['BUNDLE_DIR_NAME']
         if public_path:
-            relpath_dir_prefix = public_path
+            return staticfiles_storage.url(public_path)
 
         relpath = '{0}{1}'.format(
-            relpath_dir_prefix, chunk['name']
+            self.config['BUNDLE_DIR_NAME'], chunk['name']
         )
         return staticfiles_storage.url(relpath)
 
