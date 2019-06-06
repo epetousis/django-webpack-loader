@@ -1,5 +1,6 @@
 import json
 import time
+import os
 from io import open
 
 from django.conf import settings
@@ -53,7 +54,8 @@ class WebpackLoader(object):
         # TODO: Add a WEBPACK_LOADER flag to revert to old
         # functionality
         if public_path:
-            return staticfiles_storage.url(public_path)
+            public_path_stricthashable = os.path.normpath(public_path).replace(settings.STATIC_URL, '', 1)
+            return staticfiles_storage.url(public_path_stricthashable)
 
         relpath = '{0}{1}'.format(
             self.config['BUNDLE_DIR_NAME'], chunk['name']
