@@ -48,11 +48,16 @@ class WebpackLoader(object):
 
     def get_chunk_url(self, chunk):
         public_path = chunk.get('publicPath')
+        # get_chunk_url assumes you don't prepend a URL
+        # to the start of publicPaths in your webpack config.
+        # TODO: Add a WEBPACK_LOADER flag to revert to old
+        # functionality
+        relpath_dir_prefix = self.config['BUNDLE_DIR_NAME']
         if public_path:
-            return public_path
+            relpath_dir_prefix = public_path
 
         relpath = '{0}{1}'.format(
-            self.config['BUNDLE_DIR_NAME'], chunk['name']
+            relpath_dir_prefix, chunk['name']
         )
         return staticfiles_storage.url(relpath)
 
