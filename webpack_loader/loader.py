@@ -49,11 +49,12 @@ class WebpackLoader(object):
 
     def get_chunk_url(self, chunk):
         public_path = chunk.get('publicPath')
-        # TODO: Add a WEBPACK_LOADER flag to revert to old
-        # functionality
         if public_path:
-            public_path_stricthashable = os.path.normpath(public_path).replace(settings.STATIC_URL, '', 1)
-            return staticfiles_storage.url(public_path_stricthashable)
+            if self.config['USE_STATICFILES_URL']:
+                public_path_stricthashable = os.path.normpath(public_path).replace(settings.STATIC_URL, '', 1)
+                return staticfiles_storage.url(public_path_stricthashable)
+            else:
+                return public_path
 
         relpath = '{0}{1}'.format(
             self.config['BUNDLE_DIR_NAME'], chunk['name']

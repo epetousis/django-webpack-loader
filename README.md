@@ -88,6 +88,7 @@ WEBPACK_LOADER = {
         'CACHE': not DEBUG,
         'BUNDLE_DIR_NAME': 'webpack_bundles/', # must end with slash
         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'USE_STATICFILES_URL': False,
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None,
         'IGNORE': [r'.+\.hot-update.js', r'.+\.map']
@@ -144,6 +145,11 @@ new BundleTracker({filename: './webpack-stats.json'})
 ```
 
 and your webpack config is located at `/home/src/webpack.config.js`, then the value of `STATS_FILE` should be `/home/src/webpack-stats.json`
+
+<br>
+
+#### USE_STATICFILES_URL
+`USE_STATICFILES_URL` should be true if the static url of the file (from Django) should be used instead of the public url (from `webpack-stats.json`).
 
 <br>
 
