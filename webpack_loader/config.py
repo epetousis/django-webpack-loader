@@ -11,6 +11,7 @@ DEFAULT_CONFIG = {
         'CACHE': not settings.DEBUG,
         'BUNDLE_DIR_NAME': 'webpack_bundles/',
         'STATS_FILE': 'webpack-stats.json',
+        'USE_STATICFILES_URL': False,
         # FIXME: Explore usage of fsnotify
         'POLL_INTERVAL': 0.1,
         'TIMEOUT': None,
